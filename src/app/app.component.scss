@@ -1,9 +1,14 @@
 :host {
   min-width: 600px;
-  padding:50px;
 }
+
+h3, h4 {
+  color: #595959;
+}
+
 .container {
-  padding-top: 100px;
+  padding: 50px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,17 +17,23 @@
 
   .json-input {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .input {
-    display: flex;
     flex-direction: column;
+    .input-title {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
     textarea {
+      background: #1e1e1e;
+      border-radius: 4px;
+      background: #1e1e1e;
+      color: #595959;
       width: 1000px;
       height: 200px;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
@@ -31,23 +42,50 @@
     width: 1000px;
     display: flex;
     flex-direction: column;
+
+    label {
+      color: #9b9b9b;
+    }
+    input {
+      color: #595959;
+    }
   }
 
   .output {
     width: 100%;
-    max-width: 1000px;
+    margin: 50px;
 
     min-height: 200px;
     clr-tabs {
       border-top: 1px solid black;
     }
+    section {
+      width:100%;
+    }
 
-    .tab-contentx {
+
+    .entity-tab {
+      color:#595959;
       display: flex;
       padding: 10px;
+      height: 100%;
+      width:1300px;
+      flex-direction: row;
+      justify-content: space-evenly;
       ngx-monaco-editor {
         display: flex;
-        height: 500px;
+        height: 100%;
+        width: 600px;
+      }
+    }
+
+    .relationships-tab {
+      display: flex;
+      padding: 10px;
+      height: 100%;
+      ngx-monaco-editor {
+        display: flex;
+        height: 100%;
         width: 700px;
       }
     }

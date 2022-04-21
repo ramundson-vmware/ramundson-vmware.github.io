@@ -1,0 +1,194 @@
+{
+    "service": "Software",
+    "provider": "Host",
+    "type": "memory",
+    "id": {
+      "idType": "Extract",
+      "extractedInfo": {
+        "name": "Id",
+        "type": "string"
+      }
+    },
+    "locationOverride": {
+      "locationType": "Extract",
+      "extractedInfo": {
+        "name": "Location",
+        "type": "string"
+      }
+    },
+    "properties": [
+      {
+        "name": "Total",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Free",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Available",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Buffers",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Cached",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Active",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Inactive",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Dirty",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Writeback",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Anon Pages",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Mapped",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Slab",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Slab Reclaimable",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Slab Unreclaim",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Page Tables",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Nfs Unstable",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Bounce",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Commit Limit",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Committed As",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Vmalloc Total",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Vmalloc Used",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Vmalloc Chunk",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      },
+      {
+        "name": "Hugepage Size",
+        "description": "CONVERTER - INCOMPLETE",
+        "type": "string"
+      }
+    ],
+    "relationships": [
+      {
+        "type": "IsAssociatedWith",
+        "targetEntity": "OSId",
+        "targetEntityId": {
+          "idType": "Extract",
+          "extractedInfo": {
+            "name": "OSId",
+            "type": "string"
+          }
+        },
+        "targetEntityType": "OS",
+        "targetEntityProvider": "Host",
+        "targetEntityService": "Software"
+      },
+      {
+        "type": "Contains",
+        "targetEntity": {
+          "name": "swap",
+          "description": "CONVERTER - INCOMPLETE",
+          "type": "complex",
+          "complexAttributes": {
+            "schemaFile": "software/swap.json"
+          }
+        },
+        "targetEntityService": "Software",
+        "targetEntityProvider": "Host",
+        "targetEntityType": "swap"
+      },
+      {
+        "type": "Contains",
+        "targetEntity": {
+          "name": "hugepages",
+          "description": "CONVERTER - INCOMPLETE",
+          "type": "complex",
+          "complexAttributes": {
+            "schemaFile": "software/hugepages.json"
+          }
+        },
+        "targetEntityService": "Software",
+        "targetEntityProvider": "Host",
+        "targetEntityType": "hugepages"
+      },
+      {
+        "type": "Contains",
+        "targetEntity": {
+          "name": "directmap",
+          "description": "CONVERTER - INCOMPLETE",
+          "type": "complex",
+          "complexAttributes": {
+            "schemaFile": "software/directmap.json"
+          }
+        },
+        "targetEntityService": "Software",
+        "targetEntityProvider": "Host",
+        "targetEntityType": "directmap"
+      }
+    ]
+  }

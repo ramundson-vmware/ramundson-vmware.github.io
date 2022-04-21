@@ -1,0 +1,213 @@
+{
+  "version": "1.0",
+  "id": {
+    "idType": "Extract",
+    "extractedInfo": {
+      "name": "Id",
+      "type": "string"
+    }
+  },
+  "locationOverride": {
+    "locationType": "Extract",
+    "extractedInfo": {
+      "name": "Location",
+      "type": "string"
+    }
+  },
+  "provider": "Host",
+  "service": "Software",
+  "type": "OS",
+  "properties": [
+    {
+      "name": "IPAddressNetwork",
+      "description": "The network assigned to the host. i.e. 10.11.160.0/19",
+      "type": "string"
+    },
+    {
+      "name": "IPAddress",
+      "description": "The internal ipv4 address assigned to the host",
+      "type": "string"
+    },
+    {
+      "name": "IP6Address",
+      "description": "The internal ipv6 address assigned to the host",
+      "type": "string"
+    },
+    {
+      "name": "MacAddress",
+      "description": "The mac address assigned to the host.",
+      "type": "string"
+    },
+    {
+      "name": "OS",
+      "description": "The name of the operating system",
+      "type": "string"
+    },
+    {
+      "name": "OSVersion",
+      "description": "The version of the operating system",
+      "type": "string"
+    },
+    {
+      "name": "Platform",
+      "description": "The OS platform",
+      "type": "string"
+    },
+    {
+      "name": "PlatformVersion",
+      "description": "The OS platform version",
+      "type": "string"
+    },
+    {
+      "name": "PlatformFamily",
+      "description": "The OS platform family",
+      "type": "string"
+    },
+    {
+      "name": "UptimeSeconds",
+      "description": "The uptime for the host in seconds",
+      "type": "long"
+    },
+    {
+      "name": "Uptime",
+      "description": "The uptime for the host in human readable format",
+      "type": "string"
+    },
+    {
+      "name": "IdleTimeSeconds",
+      "description": "The idle time for the host in seconds.",
+      "type": "long"
+    },
+    {
+      "name": "IdleTime",
+      "description": "The idle time for the host in human readable format.",
+      "type": "string"
+    },
+    {
+      "name": "Hostname",
+      "description": "The hostname assigned to the host.",
+      "type": "string"
+    },
+    {
+      "name": "MachineName",
+      "description": "The machine name assigned to the host.",
+      "type": "string"
+    },
+    {
+      "name": "MachineId",
+      "description": "The machine id assigned to the host.",
+      "type": "string"
+    },
+    {
+      "name": "FQDN",
+      "description": "The fully qualified domain name for the host.",
+      "type": "string"
+    },
+    {
+      "name": "Domain",
+      "description": "The to which the host belongs.",
+      "type": "string"
+    },
+    {
+      "name": "InitPackage",
+      "description": "The system which control the host initialization.",
+      "type": "string"
+    }
+  ],
+  "relationships": [
+    {
+      "type": "Contains",
+      "targetEntity": {
+        "name": "Kernel",
+        "description": "The details of the kernel for this host OS",
+        "type": "complex",
+        "complexAttributes": {
+          "schemaFile": "software/kernel.json"
+        }
+      },
+      "targetEntityProvider": "Host",
+      "targetEntityService": "Software",
+      "targetEntityType": "Kernel"
+    },
+    {
+      "type": "Contains",
+      "targetEntity": {
+        "name": "Memory",
+        "description": "The details of the memory for this host OS",
+        "type": "complex",
+        "complexAttributes": {
+          "schemaFile": "software/memory.json"
+        }
+      },
+      "targetEntityProvider": "Host",
+      "targetEntityService": "Software",
+      "targetEntityType": "Memory"
+    },
+    {
+      "type": "Contains",
+      "targetEntity": {
+        "name": "InstalledPackages",
+        "description": "The details of the memory for this host OS",
+        "type": "complex",
+        "complexAttributes": {
+          "schemaFile": "software/installedPackages.json"
+        }
+      },
+      "targetEntityProvider": "Host",
+      "targetEntityService": "Software",
+      "targetEntityType": "InstalledPackages"
+    },
+    {
+      "type": "Contains",
+      "targetEntity": {
+        "name": "AttachedBlockDevices",
+        "description": "block devices on this host",
+        "type": "complex",
+        "complexAttributes": {
+          "schemaFile": "software/attached_block_devices.json"
+        }
+      },
+      "targetEntityProvider": "Host",
+      "targetEntityService": "Software",
+      "targetEntityType": "AttachedBlockDevices"
+    },
+    {
+      "type": "Contains",
+      "targetEntity": {
+        "name": "Dmi",
+        "description": "The details of the dmi of this host",
+        "type": "complex",
+        "complexAttributes": {
+          "schemaFile": "software/dmi.json"
+        }
+      },
+      "targetEntityProvider": "Host",
+      "targetEntityService": "Software",
+      "targetEntityType": "Dmi"
+    },
+    {
+      "type": "IsAssociatedWith",
+      "targetEntity": {
+        "name": "ComputeResourceId",
+        "description": "ID of the node assigned by the cloud provider in the format: <ProviderName>://<ProviderSpecificNodeID>. Optional.",
+        "type": "string"
+      },
+      "targetEntityId": {
+        "idType": "Extract",
+        "extractedInfo": {
+          "name": "ComputeResourceId",
+          "type": "string"
+        }
+      },
+      "targetEntityType": "Instance",
+      "targetEntityProvider": "AWS",
+      "targetEntityService": "EC2"
+    }
+  ],
+  "changeEvents": [
+    {
+      "name": "ADDED",
+      "source": "OS"
+    }
+  ]
+}

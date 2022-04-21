@@ -8,8 +8,20 @@ import '@cds/core/input/register.js';
 })
 export class AppComponent {
 
-  editorOptions = { theme: 'vs-dark', language: 'json' };
-  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+  editorOptions = {
+    theme: 'vs-dark',
+    language: 'json',
+    // "autoIndent": true,
+    // "formatOnPaste": true,
+    // "formatOnType": true
+  };
+  goLangEditorOptions = {
+    theme: 'vs-dark',
+    language: 'go',
+    // "autoIndent": true,
+    // "formatOnPaste": true,
+    // "formatOnType": true
+  };
 
   @ViewChildren('todoInput')
   todoInputElement!: QueryList<any>;
@@ -18,6 +30,7 @@ export class AppComponent {
   schemaList: any[] = [];
   updatedSchemaList: any[] = [];
   relationships: any;
+  golangStructs: any[] = [];
   updatedRelationships: any;
   activeTab: any = "";
 
@@ -377,6 +390,7 @@ export class AppComponent {
 
       this.relationships = result[1];
       this.manualInfo = result[2];
+      this.golangStructs = result[3]
     } catch (e) {
       if (e == "Failed to parse JSON") {
         this.invalidJsonInput = true;

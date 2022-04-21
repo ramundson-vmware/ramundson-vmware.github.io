@@ -19,7 +19,7 @@ import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
   ],
   providers: [{
     provide: MONACO_PATH,
-    useValue: 'https://unpkg.com/monaco-editor@0.24.0/min/vs'
+    useValue: 'https://unpkg.com/monaco-editor@0.33.0/min/vs'
   }],
   bootstrap: [AppComponent]
 })

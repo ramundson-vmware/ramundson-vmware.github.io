@@ -24,10 +24,12 @@
     "@clr/ui": "^13.2.0",
     "@materia-ui/ngx-monaco-editor": "^6.0.0",
     "@ngstack/code-editor": "^4.0.0",
+    "@types/number-to-words": "^1.2.1",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.33.0",
     "ngx-monaco-editor": "^12.0.0",
+    "number-to-words": "^1.2.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import * as NumToWords from 'number-to-words';
 
 const parentOfPrimaryEntityInfo = {
   "targetEntity": {
@@ -19,7 +20,7 @@ const parentOfPrimaryEntityInfo = {
 }
 
 
-export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: string, parentOfPrimaryEntityInfo: any, manualInfo: Map<string, string>): [any, any, any] {
+export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: string, parentOfPrimaryEntityInfo: any, manualInfo: Map<string, string>, nameChanges?: Map<string, string>): [any, any, any, any] {
 
   let jsonInput: any;
 
@@ -48,56 +49,78 @@ export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: 
   }
 
   let schemas: any[] = [];
+  let golangStructs: any[] = [];
 
 
   let entitiesToParse = [
     [primaryEntityName, jsonInput]
   ];
 
-  // traverse entities and add children to list
   while (entitiesToParse.length > 0) {
+    console.log(`'${_.startCase("127.0.0.1").replace(/" "/gi, "")}'`)
 
-    // grab an entity and remove from list
     let entity: any = entitiesToParse.shift();
 
-    console.log("processing entity", entity[0]);
-    console.log("entities left: ", entitiesToParse.length)
+    let entityName = properNaming(entity[0], nameChanges);
 
-    let entityName = entity[0];
     let entityValue = entity[1];
 
-    if (entityValue) {
+    console.log("entities left: ", entitiesToParse.length)
+    console.log("processing entity", entityName);
 
-      let subEntities = Object.entries(entityValue).filter((entry) => isAnEntity(entry[1]));
+    // skip to next loop if value is null
+    if (entityValue === null || entityValue === undefined) {
+      continue;
+    }
 
-      let nonEntityProps = Object.entries(entityValue).filter((entry) => !isAnEntity(entry[1]));
+    // split apart properties that are entities and ones that arent
+    let subEntities = Object.entries(entityValue).filter((entry) => isAnEntity(entry[1]));
+    let nonEntityProps = Object.entries(entityValue).filter((entry) => !isAnEntity(entry[1]) && !isAMap(entry[1]));
+    let mapEntities = Object.entries(entityValue).filter((entry) => isAMap(entry[1]));
 
-      //add relationship entry if none exists
-      if (!relationships[entityName]) {
-        relationships[entityName] = {
-          parent: {
-            id: entityName + 'Id',
-            name: entityName,
-            description: manualInfoLookup(`${relationships[entityName].parent.name}.${entityName}.description`, manualInfo),
-            type: entityName
-          },
-          children: []
-        }
-      }
+    // map entities should be just a parent entity and one instance of the mapped entity
+    mapEntities = mapEntities.map(([name, value]: [any, any]) => {
+      let firstMappedEntity = value[Object.keys(value)[0]];
 
-      // add all sub entities to children relationship entry. This doesnt include maps and properties that arent entities themselves.
-      relationships[entityName].children = subEntities.map((subEntity) => (
+      return [
+        name,
         {
-          id: subEntity[0] + 'Id',
-          name: subEntity[0],
-          description: manualInfoLookup(`${entityName}.${subEntity[0]}.description`, manualInfo),
-          type: subEntity[0]
-        }));
+          [name + "Entry"]: firstMappedEntity
+        }
+      ];
+    });
+
+    // add relationship entry if none exists
+    if (!relationships[entityName]) {
+      relationships[entityName] = {
+        parent: {
+          id: entityName + 'Id',
+          name: entityName,
+          description: manualInfoLookup(`${relationships[entityName].parent.name}.${entityName}.description`, manualInfo),
+          type: entityName
+        },
+        children: []
+      }
+    }
+
+    // add all sub entities to children relationship entry. This doesnt include maps and properties that arent entities themselves.
+    relationships[entityName].children = [...subEntities, ...mapEntities].map((subEntity) => {
+      let subEntityName = properNaming(subEntity[0]);
+
+      return {
+        id: subEntityName + 'Id',
+        name: subEntityName,
+        description: manualInfoLookup(`${entityName}.${subEntity[0]}.description`, manualInfo),
+        type: subEntityName
+      }
+    });
 
 
-      //add parent relationship for each child entity found
-      subEntities
-        .forEach((subEntity) => relationships[subEntity[0]] = {
+    // add parent relationship for each child entity found
+    [...subEntities, ...mapEntities]
+      .forEach((subEntity) => {
+        let subEntityName = properNaming(subEntity[0])
+        return relationships[subEntityName] = {
           parent: {
             id: entityName + 'Id',
             name: entityName,
@@ -105,31 +128,61 @@ export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: 
             type: entityName
           },
           children: new Array()
-        })
+        }
+      })
 
 
-      //generate the schema
-      let res = createCollectorSchema(entityName, nonEntityProps, relationships[entityName], manualInfo);
-      schemas.push(res[0]);
+    // generate the schema
+    let res = createCollectorSchema(entityName, nonEntityProps, relationships[entityName], manualInfo);
+    schemas.push(res[0]);
 
-      //save items that need manual review
-      manualInfo = res[1];
+    // generate golang structs
+    golangStructs.push(createGolangStruct(entityName, subEntities, nonEntityProps, mapEntities));
 
-      // add children entities to be processed
-      entitiesToParse = [...entitiesToParse, ...subEntities];
+    // save items that need manual review
+    manualInfo = res[1];
 
-    }
+    // add children entities to be processed
+    entitiesToParse = [
+      ...entitiesToParse,
+      ...subEntities,
+      ...mapEntities
+    ]
+
   }
 
 
-  return [schemas, relationships, manualInfo];
+  return [schemas, relationships, manualInfo, golangStructs];
 }
 
+function createGolangStruct(entityName: string, subEntities: any, nonEntityProps: any, mapEntities: any) {
+  let structAsString =
+    `type ${properNaming(entityName)} struct {\r\n`;
+
+  subEntities.forEach((subEntity: any) => {
+    structAsString = structAsString + `     ${properNaming(subEntity[0])} *${properNaming(subEntity[0])} \`json:"${properNaming(subEntity[0])},omitempty"\`\r\n`;
+  });
+  structAsString = structAsString + '\r\n';
+  nonEntityProps.forEach((prop: any) => {
+    structAsString = structAsString + `     ${properNaming(prop[0])} *string \`json:"${prop[0]},omitempty"\`\r\n`;
+  })
+
+  structAsString = structAsString + '}'
+  return structAsString;
+}
+
+/**
+ *
+ * @param entityName Name of entity
+ * @param properties Properties that are not other entities
+ * @param relationships relationships of entity i.e. parent/children
+ * @param manualInfo Map of info that needs manual review or has reveived it. call manualInfoLookup() to fetch unknown properties or set request review
+ */
 function createCollectorSchema(entityName: string, properties: any[], relationships: any, manualInfo: Map<string, string>): [any, Map<string, string>] {
   let schema = {
     "service": "Software",
     "provider": "Host",
-    "type": entityName,
+    "type": properNaming(entityName),
 
     "id": ID_EXTRACTION,
 
@@ -137,11 +190,8 @@ function createCollectorSchema(entityName: string, properties: any[], relationsh
 
     "properties": [
       ...properties.map((property) => {
-        // convert to TitleCase to match Go Struct syntax
-        property[0] = _.startCase(_.lowerCase(property[0]))
-
         return {
-          "name": property[0],
+          "name": properNaming(property[0]),
           "description": manualInfoLookup(`${relationships.parent}.${property[0]}.description`, manualInfo),
           "type": typeof property[1]
         };
@@ -196,13 +246,18 @@ function isAMap(object: any) {
   let secondItem = object[keys[1]];
 
   if (keys.length < 2) {
-    isAMap = false;
+    return false;
   }
 
   if (typeof firstItem !== "object") {
-    isAMap = false;
+    return false;
   }
+
   if (!firstItem || !secondItem) {
+    return false;
+  }
+
+  if (typeof firstItem === "string") {
     return false;
   }
 
@@ -212,15 +267,18 @@ function isAMap(object: any) {
   propsIn1st.forEach((prop) => {
     if (!propsIn2nd.includes(prop)) {
       isAMap = false;
+      return;
     }
   });
   return isAMap;
 }
 
 function isAnEntity(object: any) {
-  return typeof object === "object" && object !== "array" && !isAMap(object);
-}
+  let keys = Object.keys(object);
+  let firstItem = object[keys[0]];
 
+  return !Array.isArray(object) && typeof object === "object" && !isAMap(object);
+}
 
 function manualInfoLookup(key: string, manualInfo: Map<string, string>) {
   if (!manualInfo.has(key)) {
@@ -229,7 +287,18 @@ function manualInfoLookup(key: string, manualInfo: Map<string, string>) {
   return manualInfo.get(key)
 }
 
-
+function properNaming(name: string, nameChanges?: Map<string, string>): string {
+  if (nameChanges?.has(name)) {
+    return nameChanges.get(name)!;
+  }
+  name = _.startCase(name).replace(/\s/g, '');
+  if (!isNaN(Number.parseInt(name))) {
+    name = NumToWords.toWords(name);
+  } else if (!isNaN(Number.parseInt(name[0]))) {
+    name = NumToWords.toWords(name[0]) + name.substring(1, name.length);
+  }
+  return name;
+}
 
 export const MANUAL_REVIEW_NEEDED_PLACEHOLDER = "CONVERTER - INCOMPLETE";
 
