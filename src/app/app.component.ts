@@ -48,13 +48,14 @@ export class AppComponent {
   }
 
   startConversion(event: any) {
+    if(this.jsonInput == "{\n\n}") return;
     this.invalidJsonInput = false;
     // this.jsonInput = JSON.parse(event);
     console.log(this.jsonInput)
     let result: any[];
 
     try {
-      result = Converter.JsonToCollectorSchema(this.jsonInput, "OS", { name: "ComputeResourceId" }, this.manualInfo);
+      result = Converter.JsonToCollectorSchema(this.jsonInput, "OS", { name: "ComputeResourceId", type: "Host",  }, this.manualInfo);
       this.schemaList = result[0];
       console.log(result[1])
 
