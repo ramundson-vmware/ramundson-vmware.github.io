@@ -14,9 +14,7 @@
         </div>
       </ng-container>
     </div>
-    <textarea (input)="startConversion($event)"
-              [value]="jsonInput"
-              (ngModelChange)="startConversion($event)">
+    <textarea [(ngModel)]="jsonInput">
     </textarea>
     <button class="btn"
             (click)="start()">Run

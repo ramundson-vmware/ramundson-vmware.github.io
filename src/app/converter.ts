@@ -25,7 +25,11 @@ export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: 
   let jsonInput: any;
 
   try {
-    jsonInput = JSON.parse(rawEntityJson);
+    if (typeof rawEntityJson == 'string') {
+      jsonInput = JSON.parse(rawEntityJson);
+    } else {
+      jsonInput = rawEntityJson;
+    }
   } catch (e) {
     throw "Failed to parse JSON";
   }

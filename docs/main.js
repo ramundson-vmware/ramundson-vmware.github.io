@@ -37,9 +37,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cds_core_input_register_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cds/core/input/register.js */ 8050);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 8583);
-/* harmony import */ var _clr_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @clr/angular */ 6675);
-/* harmony import */ var _materia_ui_ngx_monaco_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @materia-ui/ngx-monaco-editor */ 2504);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 3679);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 3679);
+/* harmony import */ var _clr_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @clr/angular */ 6675);
+/* harmony import */ var _materia_ui_ngx_monaco_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @materia-ui/ngx-monaco-editor */ 2504);
 
 
 
@@ -201,340 +201,15 @@ class AppComponent {
         this.activeTab = "";
         this.invalidJsonInput = false;
         this.currentTodo = 0;
-        this.jsonInput = JSON.stringify({
-            "kernel": {
-                "name": "Linux",
-                "release": "4.14.203-156.332.amzn2.x86_64",
-                "version": "#1 SMP Fri Oct 30 19:19:33 UTC 2020",
-                "machine": "x86_64",
-                "processor": "x86_64",
-                "os": "GNU/Linux"
-            },
-            "memory": {
-                "swap": {
-                    "cached": "0kB",
-                    "total": "0kB",
-                    "free": "0kB"
-                },
-                "hugepages": {
-                    "total": "0",
-                    "free": "0",
-                    "reserved": "0",
-                    "surplus": "0"
-                },
-                "directmap": {
-                    "4k": "55296kB",
-                    "2M": "993280kB"
-                },
-                "total": "1006944kB",
-                "free": "202380kB",
-                "available": "695912kB",
-                "buffers": "2144kB",
-                "cached": "586184kB",
-                "active": "195172kB",
-                "inactive": "475220kB",
-                "dirty": "66676kB",
-                "writeback": "0kB",
-                "anon_pages": "82052kB",
-                "mapped": "60296kB",
-                "slab": "92376kB",
-                "slab_reclaimable": "66180kB",
-                "slab_unreclaim": "26196kB",
-                "page_tables": "3892kB",
-                "nfs_unstable": "0kB",
-                "bounce": "0kB",
-                "commit_limit": "503472kB",
-                "committed_as": "476588kB",
-                "vmalloc_total": "34359738367kB",
-                "vmalloc_used": "0kB",
-                "vmalloc_chunk": "0kB",
-                "hugepage_size": "2048kB"
-            },
-            "network": {
-                "interfaces": {
-                    "lo": {
-                        "mtu": "65536",
-                        "flags": [
-                            "LOOPBACK",
-                            "UP",
-                            "LOWER_UP"
-                        ],
-                        "encapsulation": "Loopback",
-                        "addresses": {
-                            "127.0.0.1": {
-                                "family": "inet",
-                                "prefixlen": "8",
-                                "netmask": "255.0.0.0",
-                                "scope": "Node"
-                            },
-                            "::1": {
-                                "family": "inet6",
-                                "prefixlen": "128",
-                                "scope": "Node",
-                                "tags": []
-                            }
-                        },
-                        "state": "unknown",
-                        "routes": [
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            },
-                            {
-                                "destination": "unreachable",
-                                "family": "inet6",
-                                "metric": "1024"
-                            }
-                        ]
-                    },
-                    "eth0": {
-                        "type": "eth",
-                        "number": "0",
-                        "mtu": "9001",
-                        "flags": [
-                            "BROADCAST",
-                            "MULTICAST",
-                            "UP",
-                            "LOWER_UP"
-                        ],
-                        "encapsulation": "Ethernet",
-                        "addresses": {
-                            "0E:D3:55:72:05:11": {
-                                "family": "lladdr"
-                            },
-                            "10.11.160.101": {
-                                "family": "inet",
-                                "prefixlen": "19",
-                                "netmask": "255.255.224.0",
-                                "broadcast": "10.11.191.255",
-                                "scope": "Global"
-                            },
-                            "fe80::cd3:55ff:fe72:511": {
-                                "family": "inet6",
-                                "prefixlen": "64",
-                                "scope": "Link",
-                                "tags": []
-                            }
-                        },
-                        "state": "up",
-                        "arp": {
-                            "169.254.169.254": "0e:70:51:08:a7:28",
-                            "10.11.160.1": "0e:70:51:08:a7:28"
-                        },
-                        "routes": [
-                            {
-                                "destination": "default",
-                                "family": "inet",
-                                "via": "10.11.160.1"
-                            },
-                            {
-                                "destination": "10.11.160.0/19",
-                                "family": "inet",
-                                "scope": "link",
-                                "proto": "kernel",
-                                "src": "10.11.160.101"
-                            },
-                            {
-                                "destination": "169.254.169.254",
-                                "family": "inet"
-                            },
-                            {
-                                "destination": "fe80::/64",
-                                "family": "inet6",
-                                "metric": "256",
-                                "proto": "kernel"
-                            }
-                        ]
-                    }
-                },
-                "default_interface": "eth0",
-                "default_gateway": "10.11.160.1"
-            },
-            "IPAddress": "10.11.160.0/19",
-            "ipaddress": "10.11.160.101",
-            "macaddress": "0E:D3:55:72:05:11",
-            "ip6address": "fe80::cd3:55ff:fe72:511",
-            "os": "linux",
-            "os_version": "4.14.203-156.332.amzn2.x86_64",
-            "platform": "amazon",
-            "platform_version": "2",
-            "platform_family": "amazon",
-            "uptime_seconds": 99,
-            "uptime": "1 minutes 39 seconds",
-            "idletime_seconds": 30,
-            "idletime": "30 seconds",
-            "dmi": {
-                "dmidecode_version": "3.0",
-                "smbios_version": "2.7",
-                "bios": {
-                    "vendor": "Xen",
-                    "version": "4.11.amazon",
-                    "release_date": "08/24/2006",
-                    "address": "0xE8000",
-                    "runtime_size": "96 kB",
-                    "rom_size": "64 kB",
-                    "bios_revision": "4.11"
-                },
-                "system": {
-                    "manufacturer": "Xen",
-                    "product_name": "HVM domU",
-                    "version": "4.11.amazon",
-                    "serial_number": "ec2678df-0efe-5d76-2d98-3543ab3851cc",
-                    "uuid": "EC2678DF-0EFE-5D76-2D98-3543AB3851CC",
-                    "wake_up_type": "Power Switch",
-                    "sku_number": "Not Specified",
-                    "family": "Not Specified"
-                },
-                "chassis": {
-                    "manufacturer": "Xen",
-                    "type": "Other",
-                    "lock": "Not Present",
-                    "version": "Not Specified",
-                    "serial_number": "Not Specified",
-                    "asset_tag": "Not Specified",
-                    "boot_up_state": "Safe",
-                    "power_supply_state": "Safe",
-                    "thermal_state": "Safe",
-                    "security_status": "Unknown",
-                    "oem_information": "0x00000000",
-                    "height": "Unspecified",
-                    "number_of_power_cords": "Unspecified",
-                    "contained_elements": "0"
-                },
-                "processor": {
-                    "socket_designation": "CPU 1",
-                    "type": "Central Processor",
-                    "family": "Other",
-                    "manufacturer": "Intel",
-                    "id": "F2 06 03 00 FF FB 8B 17",
-                    "version": "Not Specified",
-                    "voltage": "Unknown",
-                    "external_clock": "Unknown",
-                    "max_speed": "2400 MHz",
-                    "current_speed": "2400 MHz",
-                    "status": "Populated, Enabled",
-                    "upgrade": "Other",
-                    "l1_cache_handle": "Not Provided",
-                    "l2_cache_handle": "Not Provided",
-                    "l3_cache_handle": "Not Provided",
-                    "serial_number": "Not Specified",
-                    "asset_tag": "Not Specified",
-                    "part_number": "Not Specified"
-                }
-            },
-            "json?": "{\n  \"accountId\" : \"530342348278\",\n  \"architecture\" : \"x86_64\",\n  \"availabilityZone\" : \"us-east-1a\",\n  \"billingProducts\" : null,\n  \"devpayProductCodes\" : null,\n  \"marketplaceProductCodes\" : null,\n  \"imageId\" : \"ami-013435712e3cebc25\",\n  \"instanceId\" : \"i-0ea0b551c0aa043e1\",\n  \"instanceType\" : \"t2.micro\",\n  \"kernelId\" : null,\n  \"pendingTime\" : \"2022-01-20T20:33:06Z\",\n  \"privateIp\" : \"10.11.160.101\",\n  \"ramdiskId\" : null,\n  \"region\" : \"us-east-1\",\n  \"version\" : \"2017-09-30\"\n}",
-            "hostname": "ip-10-11-160-101",
-            "machinename": "ip-10-11-160-101.ec2.internal",
-            "fqdn": "ip-10-11-160-101.ec2.internal",
-            "domain": "ec2.internal",
-            "init_package": "systemd",
-            "block_device": {
-                "xvda": {
-                    "size": "16777216",
-                    "removable": "0",
-                    "rotational": "0",
-                    "physical_block_size": "512",
-                    "logical_block_size": "512"
-                },
-                "xvdf": {
-                    "size": "20971520",
-                    "removable": "0",
-                    "rotational": "0",
-                    "physical_block_size": "512",
-                    "logical_block_size": "512"
-                }
-            },
-            "hostnamectl": {
-                "static_hostname": "ip-10-11-160-101.ec2.internal",
-                "icon_name": "computer-vm",
-                "chassis": "vm",
-                "machine_id": "ec27041a88f931b46d484ac723cf13ee",
-                "boot_id": "602c836ce028429fa9195067f6ba0ed5",
-                "virtualization": "xen",
-                "operating_system": "Amazon Linux 2",
-                "cpe_os_name": "cpe:2.3:o:amazon:amazon_linux:2",
-                "kernel": "Linux 4.14.203-156.332.amzn2.x86_64",
-                "architecture": "x86-64"
-            },
-            "machine_id": "ec27041a88f931b46d484ac723cf13ee",
-            "os_release": {
-                "name": "Amazon Linux",
-                "version": "2",
-                "id": "amzn",
-                "id_like": [
-                    "centos",
-                    "rhel",
-                    "fedora"
-                ],
-                "version_id": "2",
-                "pretty_name": "Amazon Linux 2",
-                "ansi_color": "0;33",
-                "cpe_name": "cpe:2.3:o:amazon:amazon_linux:2",
-                "home_url": "https://amazonlinux.com/"
-            },
-            "packages": {
-                "libpath_utils": {
-                    "epoch": "0",
-                    "version": "0.2.1",
-                    "release": "29.amzn2",
-                    "installdate": "1605238431",
-                    "arch": "x86_64"
-                },
-                "kbd-misc": {
-                    "epoch": "0",
-                    "version": "1.15.5",
-                    "release": "15.amzn2",
-                    "installdate": "1605238418",
-                    "arch": "noarch"
-                }
-            },
-            "time": {
-                "timezone": "UTC"
-            }
-        });
+        this.jsonInput = "{\n\n}";
     }
     start() {
         this.startConversion(this.jsonInput);
     }
     startConversion(event) {
         this.invalidJsonInput = false;
-        this.jsonInput = event;
+        // this.jsonInput = JSON.parse(event);
+        console.log(this.jsonInput);
         let result;
         try {
             result = _converter__WEBPACK_IMPORTED_MODULE_0__.JsonToCollectorSchema(this.jsonInput, "OS", { name: "ComputeResourceId" }, this.manualInfo);
@@ -588,7 +263,7 @@ AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["�
     } if (rf & 2) {
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.todoInputElement = _t);
-    } }, decls: 26, vars: 12, consts: [[1, "container"], [1, "json-input"], [1, "input-title"], [4, "ngIf"], [3, "value", "input", "ngModelChange"], [1, "btn", 3, "click"], [1, "todos"], [4, "ngFor", "ngForOf"], [1, "output"], ["clrLayout", "vertical"], ["clrTabLink", ""], [4, "clrIfActive"], [2, "color", "red", "margin-top", "24px"], [1, "badge", "badge-purple"], [2, "display", "flex", "flex-direction", "column", "margin-bottom", "20px", "width", "500px"], [2, "width", "500px"], ["clrInput", "", 2, "width", "500px", 3, "placeholder", "keyup.enter"], ["todoInput", ""], ["class", "btn", 3, "click", 4, "ngIf"], [1, "relationships-tab"], [3, "options", "ngModel", "ngModelChange"], ["class", "entity-tab", 4, "ngIf"], [1, "entity-tab"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 26, vars: 12, consts: [[1, "container"], [1, "json-input"], [1, "input-title"], [4, "ngIf"], [3, "ngModel", "ngModelChange"], [1, "btn", 3, "click"], [1, "todos"], [4, "ngFor", "ngForOf"], [1, "output"], ["clrLayout", "vertical"], ["clrTabLink", ""], [4, "clrIfActive"], [2, "color", "red", "margin-top", "24px"], [1, "badge", "badge-purple"], [2, "display", "flex", "flex-direction", "column", "margin-bottom", "20px", "width", "500px"], [2, "width", "500px"], ["clrInput", "", 2, "width", "500px", 3, "placeholder", "keyup.enter"], ["todoInput", ""], ["class", "btn", 3, "click", 4, "ngIf"], [1, "relationships-tab"], [3, "options", "ngModel", "ngModelChange"], ["class", "entity-tab", 4, "ngIf"], [1, "entity-tab"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "div", 2);
@@ -598,7 +273,7 @@ AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["�
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](5, AppComponent_ng_container_5_Template, 3, 1, "ng-container", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](6, "textarea", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("input", function AppComponent_Template_textarea_input_6_listener($event) { return ctx.startConversion($event); })("ngModelChange", function AppComponent_Template_textarea_ngModelChange_6_listener($event) { return ctx.startConversion($event); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("ngModelChange", function AppComponent_Template_textarea_ngModelChange_6_listener($event) { return ctx.jsonInput = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](7, "    ");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](8, "button", 5);
@@ -634,7 +309,7 @@ AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["�
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", (ctx.errorText == null ? null : ctx.errorText.length) > 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("value", ctx.jsonInput);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.jsonInput);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.missingInfo.size > 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
@@ -643,7 +318,7 @@ AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["�
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind3"](14, 6, _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](15, 10, ctx.missingInfo), 0, 1));
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](12);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.schemaList);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrTabs, _clr_angular__WEBPACK_IMPORTED_MODULE_4__["ÇlrTabsWillyWonka"], _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrTab, _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrTabLink, _clr_angular__WEBPACK_IMPORTED_MODULE_4__["ÇlrActiveOompaLoompa"], _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrIfActive, _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrInputContainer, _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrLabel, _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrInput, _clr_angular__WEBPACK_IMPORTED_MODULE_4__.ClrTabContent, _materia_ui_ngx_monaco_editor__WEBPACK_IMPORTED_MODULE_5__.MonacoEditorComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgModel], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.SlicePipe, _angular_common__WEBPACK_IMPORTED_MODULE_3__.KeyValuePipe, _angular_common__WEBPACK_IMPORTED_MODULE_3__.JsonPipe], styles: ["[_nghost-%COMP%] {\n  min-width: 600px;\n}\n\nh3[_ngcontent-%COMP%], h4[_ngcontent-%COMP%] {\n  color: #595959;\n}\n\n.container[_ngcontent-%COMP%] {\n  padding: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: stretch;\n  width: 100vw;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%]   .input-title[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%]   textarea[_ngcontent-%COMP%] {\n  background: #1e1e1e;\n  border-radius: 4px;\n  background: #1e1e1e;\n  color: #595959;\n  width: 1000px;\n  height: 200px;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%]   textarea[_ngcontent-%COMP%]::-webkit-scrollbar {\n  display: none;\n}\n\n.container[_ngcontent-%COMP%]   .todos[_ngcontent-%COMP%] {\n  height: 250px;\n  width: 1000px;\n  display: flex;\n  flex-direction: column;\n}\n\n.container[_ngcontent-%COMP%]   .todos[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  color: #9b9b9b;\n}\n\n.container[_ngcontent-%COMP%]   .todos[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  color: #595959;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%] {\n  width: 100%;\n  margin: 50px;\n  min-height: 200px;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   clr-tabs[_ngcontent-%COMP%] {\n  border-top: 1px solid black;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   section[_ngcontent-%COMP%] {\n  width: 100%;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .entity-tab[_ngcontent-%COMP%] {\n  color: #595959;\n  display: flex;\n  padding: 10px;\n  height: 100%;\n  width: 1300px;\n  flex-direction: row;\n  justify-content: space-evenly;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .entity-tab[_ngcontent-%COMP%]   ngx-monaco-editor[_ngcontent-%COMP%] {\n  display: flex;\n  height: 100%;\n  width: 600px;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .relationships-tab[_ngcontent-%COMP%] {\n  display: flex;\n  padding: 10px;\n  height: 100%;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .relationships-tab[_ngcontent-%COMP%]   ngx-monaco-editor[_ngcontent-%COMP%] {\n  display: flex;\n  height: 100%;\n  width: 700px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGdCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxjQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBRUEsYUFBQTtFQUNBLHNCQUFBO0VBQ0EsbUJBQUE7RUFDQSx3QkFBQTtFQUNBLFlBQUE7QUFBRjs7QUFFRTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtBQUFKOztBQUNJO0VBQ0UsYUFBQTtFQUNBLG1CQUFBO0VBQ0EsMkJBQUE7RUFDQSxtQkFBQTtBQUNOOztBQUNJO0VBQ0UsbUJBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0EsY0FBQTtFQUNBLGFBQUE7RUFDQSxhQUFBO0FBQ047O0FBQU07RUFDRSxhQUFBO0FBRVI7O0FBR0U7RUFDRSxhQUFBO0VBQ0EsYUFBQTtFQUNBLGFBQUE7RUFDQSxzQkFBQTtBQURKOztBQUdJO0VBQ0UsY0FBQTtBQUROOztBQUdJO0VBQ0UsY0FBQTtBQUROOztBQUtFO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFFQSxpQkFBQTtBQUpKOztBQUtJO0VBQ0UsMkJBQUE7QUFITjs7QUFLSTtFQUNFLFdBQUE7QUFITjs7QUFPSTtFQUNFLGNBQUE7RUFDQSxhQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSw2QkFBQTtBQUxOOztBQU1NO0VBQ0UsYUFBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0FBSlI7O0FBUUk7RUFDRSxhQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7QUFOTjs7QUFPTTtFQUNFLGFBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtBQUxSIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgbWluLXdpZHRoOiA2MDBweDtcbn1cblxuaDMsIGg0IHtcbiAgY29sb3I6ICM1OTU5NTk7XG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nOiA1MHB4O1xuXG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3RyZXRjaDtcbiAgd2lkdGg6IDEwMHZ3O1xuXG4gIC5qc29uLWlucHV0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAgLmlucHV0LXRpdGxlIHtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgICAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xuICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICB9XG4gICAgdGV4dGFyZWEge1xuICAgICAgYmFja2dyb3VuZDogIzFlMWUxZTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgIGJhY2tncm91bmQ6ICMxZTFlMWU7XG4gICAgICBjb2xvcjogIzU5NTk1OTtcbiAgICAgIHdpZHRoOiAxMDAwcHg7XG4gICAgICBoZWlnaHQ6IDIwMHB4O1xuICAgICAgJjo6LXdlYmtpdC1zY3JvbGxiYXIge1xuICAgICAgICBkaXNwbGF5OiBub25lO1xuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gIC50b2RvcyB7XG4gICAgaGVpZ2h0OiAyNTBweDtcbiAgICB3aWR0aDogMTAwMHB4O1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcblxuICAgIGxhYmVsIHtcbiAgICAgIGNvbG9yOiAjOWI5YjliO1xuICAgIH1cbiAgICBpbnB1dCB7XG4gICAgICBjb2xvcjogIzU5NTk1OTtcbiAgICB9XG4gIH1cblxuICAub3V0cHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBtYXJnaW46IDUwcHg7XG5cbiAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICBjbHItdGFicyB7XG4gICAgICBib3JkZXItdG9wOiAxcHggc29saWQgYmxhY2s7XG4gICAgfVxuICAgIHNlY3Rpb24ge1xuICAgICAgd2lkdGg6MTAwJTtcbiAgICB9XG5cblxuICAgIC5lbnRpdHktdGFiIHtcbiAgICAgIGNvbG9yOiM1OTU5NTk7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgcGFkZGluZzogMTBweDtcbiAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgIHdpZHRoOjEzMDBweDtcbiAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgICAgIG5neC1tb25hY28tZWRpdG9yIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICB3aWR0aDogNjAwcHg7XG4gICAgICB9XG4gICAgfVxuXG4gICAgLnJlbGF0aW9uc2hpcHMtdGFiIHtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBwYWRkaW5nOiAxMHB4O1xuICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgbmd4LW1vbmFjby1lZGl0b3Ige1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgIHdpZHRoOiA3MDBweDtcbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgModel, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrTabs, _clr_angular__WEBPACK_IMPORTED_MODULE_5__["ÇlrTabsWillyWonka"], _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrTab, _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrTabLink, _clr_angular__WEBPACK_IMPORTED_MODULE_5__["ÇlrActiveOompaLoompa"], _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrIfActive, _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrInputContainer, _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrLabel, _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrInput, _clr_angular__WEBPACK_IMPORTED_MODULE_5__.ClrTabContent, _materia_ui_ngx_monaco_editor__WEBPACK_IMPORTED_MODULE_6__.MonacoEditorComponent], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.SlicePipe, _angular_common__WEBPACK_IMPORTED_MODULE_3__.KeyValuePipe, _angular_common__WEBPACK_IMPORTED_MODULE_3__.JsonPipe], styles: ["[_nghost-%COMP%] {\n  min-width: 600px;\n}\n\nh3[_ngcontent-%COMP%], h4[_ngcontent-%COMP%] {\n  color: #595959;\n}\n\n.container[_ngcontent-%COMP%] {\n  padding: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: stretch;\n  width: 100vw;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%]   .input-title[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: center;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%]   textarea[_ngcontent-%COMP%] {\n  background: #1e1e1e;\n  border-radius: 4px;\n  background: #1e1e1e;\n  color: #595959;\n  width: 1000px;\n  height: 200px;\n}\n\n.container[_ngcontent-%COMP%]   .json-input[_ngcontent-%COMP%]   textarea[_ngcontent-%COMP%]::-webkit-scrollbar {\n  display: none;\n}\n\n.container[_ngcontent-%COMP%]   .todos[_ngcontent-%COMP%] {\n  height: 250px;\n  width: 1000px;\n  display: flex;\n  flex-direction: column;\n}\n\n.container[_ngcontent-%COMP%]   .todos[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  color: #9b9b9b;\n}\n\n.container[_ngcontent-%COMP%]   .todos[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  color: #595959;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%] {\n  width: 100%;\n  margin: 50px;\n  min-height: 200px;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   clr-tabs[_ngcontent-%COMP%] {\n  border-top: 1px solid black;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   section[_ngcontent-%COMP%] {\n  width: 100%;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .entity-tab[_ngcontent-%COMP%] {\n  color: #595959;\n  display: flex;\n  padding: 10px;\n  height: 100%;\n  width: 1300px;\n  flex-direction: row;\n  justify-content: space-evenly;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .entity-tab[_ngcontent-%COMP%]   ngx-monaco-editor[_ngcontent-%COMP%] {\n  display: flex;\n  height: 100%;\n  width: 600px;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .relationships-tab[_ngcontent-%COMP%] {\n  display: flex;\n  padding: 10px;\n  height: 100%;\n}\n\n.container[_ngcontent-%COMP%]   .output[_ngcontent-%COMP%]   .relationships-tab[_ngcontent-%COMP%]   ngx-monaco-editor[_ngcontent-%COMP%] {\n  display: flex;\n  height: 100%;\n  width: 700px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGdCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxjQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBRUEsYUFBQTtFQUNBLHNCQUFBO0VBQ0EsbUJBQUE7RUFDQSx3QkFBQTtFQUNBLFlBQUE7QUFBRjs7QUFFRTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtBQUFKOztBQUNJO0VBQ0UsYUFBQTtFQUNBLG1CQUFBO0VBQ0EsMkJBQUE7RUFDQSxtQkFBQTtBQUNOOztBQUNJO0VBQ0UsbUJBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0EsY0FBQTtFQUNBLGFBQUE7RUFDQSxhQUFBO0FBQ047O0FBQU07RUFDRSxhQUFBO0FBRVI7O0FBR0U7RUFDRSxhQUFBO0VBQ0EsYUFBQTtFQUNBLGFBQUE7RUFDQSxzQkFBQTtBQURKOztBQUdJO0VBQ0UsY0FBQTtBQUROOztBQUdJO0VBQ0UsY0FBQTtBQUROOztBQUtFO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFFQSxpQkFBQTtBQUpKOztBQUtJO0VBQ0UsMkJBQUE7QUFITjs7QUFLSTtFQUNFLFdBQUE7QUFITjs7QUFPSTtFQUNFLGNBQUE7RUFDQSxhQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSw2QkFBQTtBQUxOOztBQU1NO0VBQ0UsYUFBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0FBSlI7O0FBUUk7RUFDRSxhQUFBO0VBQ0EsYUFBQTtFQUNBLFlBQUE7QUFOTjs7QUFPTTtFQUNFLGFBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtBQUxSIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgbWluLXdpZHRoOiA2MDBweDtcbn1cblxuaDMsIGg0IHtcbiAgY29sb3I6ICM1OTU5NTk7XG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nOiA1MHB4O1xuXG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3RyZXRjaDtcbiAgd2lkdGg6IDEwMHZ3O1xuXG4gIC5qc29uLWlucHV0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAgLmlucHV0LXRpdGxlIHtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgICAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xuICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICB9XG4gICAgdGV4dGFyZWEge1xuICAgICAgYmFja2dyb3VuZDogIzFlMWUxZTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgIGJhY2tncm91bmQ6ICMxZTFlMWU7XG4gICAgICBjb2xvcjogIzU5NTk1OTtcbiAgICAgIHdpZHRoOiAxMDAwcHg7XG4gICAgICBoZWlnaHQ6IDIwMHB4O1xuICAgICAgJjo6LXdlYmtpdC1zY3JvbGxiYXIge1xuICAgICAgICBkaXNwbGF5OiBub25lO1xuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gIC50b2RvcyB7XG4gICAgaGVpZ2h0OiAyNTBweDtcbiAgICB3aWR0aDogMTAwMHB4O1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcblxuICAgIGxhYmVsIHtcbiAgICAgIGNvbG9yOiAjOWI5YjliO1xuICAgIH1cbiAgICBpbnB1dCB7XG4gICAgICBjb2xvcjogIzU5NTk1OTtcbiAgICB9XG4gIH1cblxuICAub3V0cHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBtYXJnaW46IDUwcHg7XG5cbiAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICBjbHItdGFicyB7XG4gICAgICBib3JkZXItdG9wOiAxcHggc29saWQgYmxhY2s7XG4gICAgfVxuICAgIHNlY3Rpb24ge1xuICAgICAgd2lkdGg6MTAwJTtcbiAgICB9XG5cblxuICAgIC5lbnRpdHktdGFiIHtcbiAgICAgIGNvbG9yOiM1OTU5NTk7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgcGFkZGluZzogMTBweDtcbiAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgIHdpZHRoOjEzMDBweDtcbiAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgICAgIG5neC1tb25hY28tZWRpdG9yIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICB3aWR0aDogNjAwcHg7XG4gICAgICB9XG4gICAgfVxuXG4gICAgLnJlbGF0aW9uc2hpcHMtdGFiIHtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBwYWRkaW5nOiAxMHB4O1xuICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgbmd4LW1vbmFjby1lZGl0b3Ige1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgIHdpZHRoOiA3MDBweDtcbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */"] });
 
 
 /***/ }),
@@ -733,7 +408,12 @@ const parentOfPrimaryEntityInfo = {
 function JsonToCollectorSchema(rawEntityJson, primaryEntityName, parentOfPrimaryEntityInfo, manualInfo, nameChanges) {
     let jsonInput;
     try {
-        jsonInput = JSON.parse(rawEntityJson);
+        if (typeof rawEntityJson == 'string') {
+            jsonInput = JSON.parse(rawEntityJson);
+        }
+        else {
+            jsonInput = rawEntityJson;
+        }
     }
     catch (e) {
         throw "Failed to parse JSON";
