@@ -1,14 +1,19 @@
 <div class="container">
-  <div style="display:flex;flex-direction: row;">
-    Input JSON
-    <ng-container *ngIf="errorText?.length > 0">
 
-      <div style="color:red">
-        &nbsp;&nbsp;{{errorText}}
-      </div>
-    </ng-container>
-  </div>
+
+
   <div class="input">
+    <div class="json-input">
+      <h3>
+        Input JSON
+      </h3>
+      <ng-container *ngIf="errorText?.length > 0">
+
+        <div style="color:red;margin-top:24px">
+          &nbsp;&nbsp;{{errorText}}
+        </div>
+      </ng-container>
+    </div>
     <textarea (input)="startConversion($event)"
               [value]="jsonInput"
               (ngModelChange)="startConversion($event)">
@@ -18,8 +23,12 @@
     </button>
   </div>
 
-  <div class="todos">
 
+
+  <div class="todos">
+    <h3 *ngIf="missingInfo.size > 0">
+      Missing Info
+    </h3>
     <div *ngIf="missingInfo.size > 0">
       Manual Input Needed
       <span class="badge badge-purple">{{missingInfo?.size}}</span>
@@ -44,32 +53,47 @@
               *ngIf="todo"
               (click)="updateManualInfo(todo.key, todoInput.value)">Ok
       </button>
-
     </ng-container>
+
   </div>
 
   <div class="output">
+    <h3>
+      Output
+    </h3>
     <clr-tabs clrLayout="vertical">
 
       <clr-tab>
         <button clrTabLink><b>Relationships</b></button>
         <clr-tab-content *clrIfActive>
-          <div style="padding:20px;">
-            {{ relationships | json}}
+          <div class="tab-contentx">
+
+            <ngx-monaco-editor [options]="editorOptions"
+                               [ngModel]="relationships | json"
+                               (ngModelChange)="relationshipCodeChange($event)">
+            </ngx-monaco-editor>
+            <br>
           </div>
         </clr-tab-content>
       </clr-tab>
 
 
-      <ng-container *ngFor="let schema of schemaList">
+      <ng-container *ngFor="let schema of schemaList; let i=index">
 
         <clr-tab>
           <button clrTabLink>{{schema?.type}}</button>
           <clr-tab-content *clrIfActive>
             <div *ngIf="schema"
-                 style="padding:20px;">
-              {{schema | json}}
+                 class="tab-contentx">
+
+              <ngx-monaco-editor [options]="editorOptions"
+                                 [ngModel]="schema | json"
+                                 (ngModelChange)="schemaCodeChange($event, i)">
+              </ngx-monaco-editor>
+
+
             </div>
+
           </clr-tab-content>
         </clr-tab>
 

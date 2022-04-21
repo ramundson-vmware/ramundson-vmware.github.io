@@ -7,12 +7,18 @@ import '@cds/core/input/register.js';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  editorOptions = { theme: 'vs-dark', language: 'json' };
+  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+
   @ViewChildren('todoInput')
   todoInputElement!: QueryList<any>;
   manualInfo: Map<string, string> = new Map();
   missingInfo: Map<string, string> = new Map();
   schemaList: any[] = [];
+  updatedSchemaList: any[] = [];
   relationships: any;
+  updatedRelationships: any;
   activeTab: any = "";
 
   invalidJsonInput: boolean = false;
@@ -367,6 +373,8 @@ export class AppComponent {
     try {
       result = Converter.JsonToCollectorSchema(this.jsonInput, "OS", { name: "ComputeResourceId" }, this.manualInfo);
       this.schemaList = result[0];
+      console.log(result[1])
+
       this.relationships = result[1];
       this.manualInfo = result[2];
     } catch (e) {
@@ -381,7 +389,7 @@ export class AppComponent {
     }
 
     Array.from(this.manualInfo.entries()).forEach((entry) => {
-      if (entry[1] == "CONVERTER - INCOMPLETE" || entry[1] == "") {
+      if (entry[1] == Converter.MANUAL_REVIEW_NEEDED_PLACEHOLDER || entry[1] == "") {
         this.missingInfo.set(entry[0], entry[1]);
       }
     })
@@ -389,19 +397,31 @@ export class AppComponent {
   }
 
   updateManualInfo(lookupKey: string, input: any) {
-    console.log(lookupKey, input)
+
     this.missingInfo.delete(lookupKey);
     this.manualInfo.set(lookupKey, input);
     this.currentTodo++;
-    console.log(this.todoInputElement.get(0).nativeElement)
     setTimeout(() => {
       this.todoInputElement.get(0).nativeElement.focus();
     }, 10)
 
   }
   lastTodo() {
-    if(this.currentTodo > 0) {
+    if (this.currentTodo > 0) {
       this.currentTodo--;
     }
+  }
+
+  relationshipCodeChange(event: any) {
+
+    this.updatedRelationships = event;
+  }
+
+  schemaCodeChange(event: any, index: any) {
+    this.updatedSchemaList[index] = event;
+  }
+
+  saveChanges() {
+
   }
 }

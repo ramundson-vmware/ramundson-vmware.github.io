@@ -1,4 +1,4 @@
-
+import * as _ from 'lodash';
 
 const parentOfPrimaryEntityInfo = {
   "targetEntity": {
@@ -20,17 +20,24 @@ const parentOfPrimaryEntityInfo = {
 
 
 export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: string, parentOfPrimaryEntityInfo: any, manualInfo: Map<string, string>): [any, any, any] {
-  console.log(manualInfo)
+
   let jsonInput: any;
+
   try {
     jsonInput = JSON.parse(rawEntityJson);
   } catch (e) {
     throw "Failed to parse JSON";
   }
+
   // define outputs
   let relationships = {
     [primaryEntityName]: {
-      "parent": parentOfPrimaryEntityInfo?.name,
+      "parent": {
+        id: parentOfPrimaryEntityInfo?.name + 'Id',
+        name: parentOfPrimaryEntityInfo?.name,
+        description: parentOfPrimaryEntityInfo.description,
+        type: parentOfPrimaryEntityInfo.type
+      },
       "children": new Array()
     }
   };
@@ -50,43 +57,67 @@ export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: 
   // traverse entities and add children to list
   while (entitiesToParse.length > 0) {
 
+    // grab an entity and remove from list
     let entity: any = entitiesToParse.shift();
 
     console.log("processing entity", entity[0]);
+    console.log("entities left: ", entitiesToParse.length)
 
     let entityName = entity[0];
     let entityValue = entity[1];
+
     if (entityValue) {
 
       let subEntities = Object.entries(entityValue).filter((entry) => isAnEntity(entry[1]));
 
       let nonEntityProps = Object.entries(entityValue).filter((entry) => !isAnEntity(entry[1]));
-      console.log("sub entities", subEntities.map((sE) => sE[0]));
-      console.log("non entities", nonEntityProps.map((sE) => sE[0]));
 
-      //add children relationships
+      //add relationship entry if none exists
       if (!relationships[entityName]) {
         relationships[entityName] = {
-          parent: null,
+          parent: {
+            id: entityName + 'Id',
+            name: entityName,
+            description: manualInfoLookup(`${relationships[entityName].parent.name}.${entityName}.description`, manualInfo),
+            type: entityName
+          },
           children: []
         }
       }
-      relationships[entityName].children = subEntities.map((subEntity) => subEntity[0]);
+
+      // add all sub entities to children relationship entry. This doesnt include maps and properties that arent entities themselves.
+      relationships[entityName].children = subEntities.map((subEntity) => (
+        {
+          id: subEntity[0] + 'Id',
+          name: subEntity[0],
+          description: manualInfoLookup(`${entityName}.${subEntity[0]}.description`, manualInfo),
+          type: subEntity[0]
+        }));
 
 
-      //add parent relationship to each child
+      //add parent relationship for each child entity found
       subEntities
-        .forEach((subEntity) => relationships[subEntity[0]] = { "parent": entityName, children: new Array() })
+        .forEach((subEntity) => relationships[subEntity[0]] = {
+          parent: {
+            id: entityName + 'Id',
+            name: entityName,
+            description: manualInfoLookup(`${relationships[entityName].parent.name}.${entityName}.description`, manualInfo),
+            type: entityName
+          },
+          children: new Array()
+        })
 
 
-      //create schema
+      //generate the schema
       let res = createCollectorSchema(entityName, nonEntityProps, relationships[entityName], manualInfo);
       schemas.push(res[0]);
+
+      //save items that need manual review
       manualInfo = res[1];
 
       // add children entities to be processed
       entitiesToParse = [...entitiesToParse, ...subEntities];
-      console.log("entities left: ", entitiesToParse.length)
+
     }
   }
 
@@ -96,66 +127,56 @@ export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: 
 
 function createCollectorSchema(entityName: string, properties: any[], relationships: any, manualInfo: Map<string, string>): [any, Map<string, string>] {
   let schema = {
-    "id": {
-      "idType": "Generate"
-    },
-    "provider": "Host",
     "service": "Software",
+    "provider": "Host",
     "type": entityName,
 
+    "id": ID_EXTRACTION,
 
-    "locationOverride": {
-      "locationType": "Extract",
-      "extractedInfo": {
-        "name": "Location",
-        "type": "string"
-      }
-    },
+    "locationOverride": LOCATION_OVERRIDE,
 
     "properties": [
       ...properties.map((property) => {
+        // convert to TitleCase to match Go Struct syntax
+        property[0] = _.startCase(_.lowerCase(property[0]))
+
         return {
           "name": property[0],
-          "description": manualInfoLookup(`${relationships.parent} -> ${property[0]} description`, manualInfo),
+          "description": manualInfoLookup(`${relationships.parent}.${property[0]}.description`, manualInfo),
           "type": typeof property[1]
         };
-
       })
     ],
 
     "relationships": [
       {
-        "type": "IsAssociatedWith",
-        "targetEntity": {
-          "name": "OS",
-          "description": "The ID of the operating system.",
-          "type": "string"
-        },
+        "type": RelationshipType.Parent,
+        "targetEntity": relationships.parent.id,
         "targetEntityId": {
           "idType": "Extract",
           "extractedInfo": {
-            "name": "OSId",
+            "name": relationships.parent.id,
             "type": "string"
           }
         },
-        "targetEntityType": "OS",
+        "targetEntityType": relationships.parent.type,
         "targetEntityProvider": "Host",
         "targetEntityService": "Software"
       },
       ...relationships.children.map((child: any) => {
         return ({
-          "type": "Contains",
+          "type": RelationshipType.Child,
           "targetEntity": {
-            "name": child,
-            "description": manualInfoLookup(`${relationships.parent} -> ${entityName} -> ${child} description`, manualInfo),
+            "name": child.type,
+            "description": manualInfoLookup(`${relationships.parent.name}.${entityName}.${child.name}.description`, manualInfo),
             "type": "complex",
             "complexAttributes": {
-              "schemaFile": "software/swap.json"
+              "schemaFile": `software/${child.type}.json`
             }
           },
-          "targetEntityProvider": "Host",
           "targetEntityService": "Software",
-          "targetEntityType": "Swap"
+          "targetEntityProvider": "Host",
+          "targetEntityType": child.type
         })
       })
     ]
@@ -163,6 +184,7 @@ function createCollectorSchema(entityName: string, properties: any[], relationsh
 
   return [schema, manualInfo];
 }
+
 
 // in this simple function a map is an object whose properties are objects with identical sub-properties
 function isAMap(object: any) {
@@ -200,13 +222,34 @@ function isAnEntity(object: any) {
 }
 
 
-function needInput() {
-
-}
-
 function manualInfoLookup(key: string, manualInfo: Map<string, string>) {
   if (!manualInfo.has(key)) {
-    manualInfo.set(key, "CONVERTER - INCOMPLETE");
+    manualInfo.set(key, MANUAL_REVIEW_NEEDED_PLACEHOLDER);
   }
   return manualInfo.get(key)
+}
+
+
+
+export const MANUAL_REVIEW_NEEDED_PLACEHOLDER = "CONVERTER - INCOMPLETE";
+
+export const LOCATION_OVERRIDE = {
+  "locationType": "Extract",
+  "extractedInfo": {
+    "name": "Location",
+    "type": "string"
+  }
+}
+
+export const ID_EXTRACTION = {
+  "idType": "Extract",
+  "extractedInfo": {
+    "name": "Id",
+    "type": "string"
+  }
+}
+
+export enum RelationshipType {
+  Parent = "IsAssociatedWith",
+  Child = "Contains"
 }
