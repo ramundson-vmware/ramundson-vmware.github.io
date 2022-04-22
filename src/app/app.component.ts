@@ -25,6 +25,9 @@ export class AppComponent {
 
   @ViewChildren('todoInput')
   todoInputElement!: QueryList<any>;
+
+  @ViewChild('primaryEntityName') primaryInputNameElement: any;
+
   manualInfo: Map<string, string> = new Map();
   missingInfo: Map<string, string> = new Map();
   schemaList: any[] = [];
@@ -48,26 +51,39 @@ export class AppComponent {
   }
 
   startConversion(event: any) {
-    if(this.jsonInput == "{\n\n}") return;
+    if (this.jsonInput == "{\n\n}") return;
     this.invalidJsonInput = false;
     // this.jsonInput = JSON.parse(event);
-    console.log(this.jsonInput)
+    console.log(this.primaryInputNameElement.nativeElement.value)
     let result: any[];
 
     try {
-      result = Converter.JsonToCollectorSchema(this.jsonInput, "OS", { name: "ComputeResourceId", type: "Host",  }, this.manualInfo);
+
+      if(!this.primaryInputNameElement.nativeElement.value) throw "Missing Primary EntityName";
+
+      result = Converter.JsonToCollectorSchema(this.jsonInput, this.primaryInputNameElement.nativeElement.value, { name: "ComputeResource", type: "Host" }, this.manualInfo);
       this.schemaList = result[0];
       console.log(result[1])
 
       this.relationships = result[1];
       this.manualInfo = result[2];
-      this.golangStructs = result[3]
+      this.golangStructs = result[3];
+
+      this.invalidJsonInput = false;
+      this.errorText = "";
     } catch (e) {
       if (e == "Failed to parse JSON") {
         this.invalidJsonInput = true;
         this.errorText = e;
         console.error(e);
       }
+      if (e == "Missing Primary EntityName") {
+        this.invalidJsonInput = true;
+        this.errorText = e;
+        console.error(e);
+      }
+
+
       else {
         throw e;
       }

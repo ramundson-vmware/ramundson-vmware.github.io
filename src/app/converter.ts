@@ -41,7 +41,7 @@ export function JsonToCollectorSchema(rawEntityJson: string, primaryEntityName: 
         id: parentOfPrimaryEntityInfo?.name + 'Id',
         name: parentOfPrimaryEntityInfo?.name,
         description: parentOfPrimaryEntityInfo.description,
-        type: parentOfPrimaryEntityInfo.type
+        type: parentOfPrimaryEntityInfo.name
       },
       "children": new Array()
     }

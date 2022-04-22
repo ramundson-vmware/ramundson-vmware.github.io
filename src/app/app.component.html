@@ -14,6 +14,15 @@
         </div>
       </ng-container>
     </div>
+
+    <clr-input-container style="width:500px">
+
+      <input #primaryEntityName
+             clrInput
+             style="width:500px"
+             [placeholder]="'Primary Entity Name'">
+    </clr-input-container>
+
     <textarea [(ngModel)]="jsonInput">
     </textarea>
     <button class="btn"
